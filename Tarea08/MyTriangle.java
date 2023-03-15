@@ -30,6 +30,7 @@ public class MyTriangle {
     public MyPoint getV3() {
         return v3;
     }
+
     public static int getCount() {
         return count;
     }
