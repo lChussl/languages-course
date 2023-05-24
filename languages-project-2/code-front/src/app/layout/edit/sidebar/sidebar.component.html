@@ -1,0 +1,35 @@
+<div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+  <a routerLink="/edit" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <span class="fs-5 fw-semibold">Data management</span>
+  </a>
+  <ul class="list-unstyled ps-0">
+    <li class="mb-1">
+      <button class="btn btn-toggle d-inline-flex align-items-center rounded link-body-emphasis collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" [attr.aria-expanded]="isTaxon()">
+        <i class="bi bi-chevron-right me-2"></i> <span class="fw-semibold">Taxons</span>
+      </button>
+      <div class="collapse" id="home-collapse" [class.show]="isTaxon()">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a routerLink="taxon/kingdom" class="link-dark rounded" [ngClass]="taxonType === 'kingdom' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Kingdom</a></li>
+          <li><a routerLink="taxon/division" class="link-dark rounded" [ngClass]="taxonType === 'division' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Division</a></li>
+          <li><a routerLink="taxon/class" class="link-dark rounded" [ngClass]="taxonType === 'class' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Class</a></li>
+          <li><a routerLink="taxon/order" class="link-dark rounded" [ngClass]="taxonType === 'order' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Order</a></li>
+          <li><a routerLink="taxon/family" class="link-dark rounded" [ngClass]="taxonType === 'family' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Family</a></li>
+          <li><a routerLink="taxon/genus" class="link-dark rounded" [ngClass]="taxonType === 'genus' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Genus</a></li>
+          <li><a routerLink="taxon/species" class="link-dark rounded" [ngClass]="taxonType === 'species' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Species</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="mb-1">
+      <button class="btn btn-toggle d-inline-flex align-items-center rounded link-body-emphasis collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse2" [attr.aria-expanded]="taxonType === 'images'">
+        <i class="bi bi-chevron-right me-2"></i> <span class="fw-semibold">Images</span>
+      </button>
+      <div class="collapse" id="home-collapse2" [class.show]="taxonType === 'images'">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a routerLink="images" class="link-dark rounded" [ngClass]="taxonType === 'images' ? 'text-primary link-primary rounded' : 'link-dark rounded'">Images</a></li>
+         </ul>
+      </div>
+    </li>
+    <li class="border-top my-3"></li>
+  </ul>
+</div>

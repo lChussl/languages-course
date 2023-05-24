@@ -1,0 +1,19 @@
+.btn-toggle[aria-expanded=true] .bi-chevron-right {
+  transition: .3s transform ease-in-out;
+  transform: rotate(90deg);
+}
+
+.btn-toggle[aria-expanded=false] .bi-chevron-right {
+  transition: .3s transform ease-in-out;
+  transform: rotate(0deg);
+}
+
+#home-collapse,
+#home-collapse2 {
+  margin-left: 2.25rem;
+}
+
+a.link-primary:hover,
+a.link-primary:focus {
+  color: var(--bs-primary) !important; /* Use the primary color defined by Bootstrap */
+}

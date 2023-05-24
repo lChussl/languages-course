@@ -1,0 +1,16 @@
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start; /* Add this line */
+}
+
+.image-card {
+  flex: 0 0 calc(20% - 1rem);
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  width: 18rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  height: auto;
+}

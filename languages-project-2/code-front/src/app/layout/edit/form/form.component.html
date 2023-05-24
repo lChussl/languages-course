@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <h1> {{ title }} management </h1>
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ action }}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" (click)="changeAction('Create')">Create</a></li>
+        <li><a class="dropdown-item" (click)="changeAction('Update')">Update</a></li>
+        <li><a class="dropdown-item" (click)="changeAction('Delete')">Delete</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="create" class="types p-5">
+    <ng-container [ngSwitch]="taxonType">
+      <app-kingdom-form
+        *ngSwitchCase="'kingdom'"
+        [action]="action"
+        [kingdoms]="kingdoms"
+        (loadTaxons)="getTaxonData()"
+      ></app-kingdom-form>
+      <app-division-form
+        *ngSwitchCase="'division'"
+        [action]="action"
+        [divisions]="divisions"
+        [kingdoms]="kingdoms"
+        (loadTaxons)="getTaxonData()"
+      ></app-division-form>
+      <app-class-form
+        *ngSwitchCase="'class'"
+        [action]="action"
+        [divisions]="divisions"
+        [classes]="classes"
+        (loadTaxons)="getTaxonData()"
+      ></app-class-form>
+      <app-order-form
+        *ngSwitchCase="'order'"
+        [action]="action"
+        [orders]="orders"
+        [classes]="classes"
+        (loadTaxons)="getTaxonData()"
+      ></app-order-form>
+      <app-family-form
+        *ngSwitchCase="'family'"
+        [action]="action"
+        [families]="families"
+        [orders]="orders"
+        (loadTaxons)="getTaxonData()"
+      ></app-family-form>
+      <app-genus-form
+        *ngSwitchCase="'genus'"
+        [action]="action"
+        [genuses]="genuses"
+        [families]="families"
+        (loadTaxons)="getTaxonData()"
+      ></app-genus-form>
+      <app-species-form
+        *ngSwitchCase="'species'"
+        [action]="action"
+        [species]="species"
+        [genuses]="genuses"
+        (loadTaxons)="getTaxonData()"
+      ></app-species-form>
+    </ng-container>
+  </div>
+</div>

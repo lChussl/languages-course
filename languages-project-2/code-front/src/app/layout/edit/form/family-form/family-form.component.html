@@ -1,0 +1,127 @@
+<div class="container my-5 p-0">
+  <form (ngSubmit)="submitForm()" [formGroup]="familyForm" *ngIf="action === 'Create'">
+    <h2 class="mb-4"> Create a new Family </h2>
+    <div class="form-floating mb-3 p-0" [ngClass]="{'has-validation': familyForm.get('scientificName')?.errors}">
+      <input class="form-control" type="text" formControlName="scientificName" placeholder="Scientific Name" [class.invalid-input]="familyForm.get('scientificName')?.touched && familyForm.get('scientificName')?.invalid" />
+      <label [class.invalid-label]="familyForm.get('scientificName')?.touched && familyForm.get('scientificName')?.invalid">Scientific name</label>
+      <div *ngIf="familyForm.get('scientificName')?.touched && familyForm.get('scientificName')?.invalid" class="invalid-feedback d-block">
+        <div *ngIf="familyForm.get('scientificName')?.errors?.['required']">Scientific name is required.</div>
+        <div *ngIf="familyForm.get('scientificName')?.errors?.['invalid']">Scientific name must start with an uppercase letter and end with eae.</div>
+      </div>
+    </div>
+    <div class="form-floating mb-3 p-0" [ngClass]="{'has-validation': familyForm.get('author')?.errors}">
+      <input class="form-control" type="text" formControlName="author" placeholder="Author" [class.invalid-input]="familyForm.get('author')?.touched && familyForm.get('author')?.invalid"/>
+      <label [class.invalid-label]="familyForm.get('author')?.touched && familyForm.get('author')?.invalid"> Author </label>
+      <div *ngIf="familyForm.get('author')?.touched && familyForm.get('author')?.invalid" class="invalid-feedback d-block">
+        <div *ngIf="familyForm.get('author')?.errors?.['required']">Scientific name is required.</div>
+      </div>
+    </div>
+    <div class="form-floating mb-3 p-0" [ngClass]="{'has-validation': familyForm.get('publicationYear')?.errors}">
+      <input class="form-control" type="number" formControlName="publicationYear" placeholder="Publication Year" [class.invalid-input]="familyForm.get('publicationYear')?.touched && familyForm.get('publicationYear')?.invalid"/>
+      <label [class.invalid-label]="familyForm.get('publicationYear')?.touched && familyForm.get('publicationYear')?.invalid"> Publication Year </label>
+      <div *ngIf="familyForm.get('publicationYear')?.touched && familyForm.get('publicationYear')?.invalid" class="invalid-feedback d-block">
+        <div *ngIf="familyForm.get('publicationYear')?.errors?.['required']">Scientific name is required.</div>
+      </div>
+    </div>
+    <div class="dropdown mb-4 mt-4" *ngIf="orders.length; else elseBlock">
+      <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ familyForm.get('ancestorId')?.value ? familyForm.get('ancestorIdName')?.value : 'Select the ancestor id' }}
+      </button>
+      <ul class="dropdown-menu form-control" aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let order of orders"><a class="dropdown-item" (click)="selectAncestor(order.id, order.scientificName)"> {{ order.id }} - {{ order.scientificName }} </a></li>
+      </ul>
+    </div>
+
+    <ng-template #elseBlock> <h4 class="mb-5"> No orders registered in our database, please go <a routerLink="/edit/taxon/kingdom">here</a> to create a kingdom and select it as ancestor </h4> </ng-template>
+
+    <div class="d-grid mt-5">
+      <button class="btn btn-primary btn-lg" type="submit" [disabled]="familyForm.invalid">Submit</button>
+    </div>
+  </form>
+
+  <form (ngSubmit)="submitForm()" [formGroup]="familyForm" *ngIf="action === 'Update'">
+    <h2> Update a Family </h2>
+    <div class="dropdown mb-4 mt-4" *ngIf="families.length; else elseBlock">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ selectedItem ? selectedItem : 'Select family' }}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let family of families"><a class="dropdown-item" (click)="selectTaxon(family.id, family.scientificName, family.author, family.publication_year, family.taxon_ancestor_id)"> {{ family.scientificName }} </a></li>
+      </ul>
+    </div>
+    <ng-template #elseBlock> <h3 class="mb-5"> No families registered in our database </h3> </ng-template>
+
+    <div class="form-floating mb-3 p-0" [ngClass]="{'has-validation': familyForm.get('scientificName')?.errors}">
+      <input class="form-control" type="text" formControlName="scientificName" placeholder="Scientific Name" [class.invalid-input]="familyForm.get('scientificName')?.touched && familyForm.get('scientificName')?.invalid" />
+      <label [class.invalid-label]="familyForm.get('scientificName')?.touched && familyForm.get('scientificName')?.invalid">Scientific name</label>
+      <div *ngIf="familyForm.get('scientificName')?.touched && familyForm.get('scientificName')?.invalid" class="invalid-feedback d-block">
+        <div *ngIf="familyForm.get('scientificName')?.errors?.['required']">Scientific name is required.</div>
+        <div *ngIf="familyForm.get('scientificName')?.errors?.['invalid']">Scientific name must start with an uppercase letter and end with eae.</div>
+      </div>
+    </div>
+    <div class="form-floating mb-3 p-0" [ngClass]="{'has-validation': familyForm.get('author')?.errors}">
+      <input class="form-control" type="text" formControlName="author" placeholder="Author" [class.invalid-input]="familyForm.get('author')?.touched && familyForm.get('author')?.invalid"/>
+      <label [class.invalid-label]="familyForm.get('author')?.touched && familyForm.get('author')?.invalid"> Author </label>
+      <div *ngIf="familyForm.get('author')?.touched && familyForm.get('author')?.invalid" class="invalid-feedback d-block">
+        <div *ngIf="familyForm.get('author')?.errors?.['required']">Scientific name is required.</div>
+      </div>
+    </div>
+    <div class="form-floating mb-3 p-0" [ngClass]="{'has-validation': familyForm.get('publicationYear')?.errors}">
+      <input class="form-control" type="number" formControlName="publicationYear" placeholder="Publication Year" [class.invalid-input]="familyForm.get('publicationYear')?.touched && familyForm.get('publicationYear')?.invalid"/>
+      <label [class.invalid-label]="familyForm.get('publicationYear')?.touched && familyForm.get('publicationYear')?.invalid"> Publication Year </label>
+      <div *ngIf="familyForm.get('publicationYear')?.touched && familyForm.get('publicationYear')?.invalid" class="invalid-feedback d-block">
+        <div *ngIf="familyForm.get('publicationYear')?.errors?.['required']">Scientific name is required.</div>
+      </div>
+    </div>
+
+    <div class="dropdown mb-4 mt-4" *ngIf="orders.length; else elseBlock">
+      <button class="form-control dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false" [disabled]="isDisabled">
+        {{ familyForm.get('ancestorId')?.value ? familyForm.get('ancestorIdName')?.value : 'Select the ancestor id' }}
+      </button>
+      <ul class="dropdown-menu form-control" aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let order of orders"><a class="dropdown-item" (click)="selectAncestor(order.id, order.scientificName)"> {{ order.id }} - {{ order.scientificName }} </a></li>
+      </ul>
+    </div>
+
+    <div class="d-grid mt-5">
+      <button class="btn btn-primary btn-lg" type="submit" [disabled]="familyForm.invalid">Submit</button>
+    </div>
+  </form>
+
+  <form *ngIf="action === 'Delete'">
+    <h2 class="mb-4"> Delete a family </h2>
+
+    <ul id="delete-content" class="list-group" *ngIf="families.length; else elseBlock">
+      <li class="list-group-item d-flex justify-content-between mb-2" *ngFor="let item of paginatedItems">
+        <div class="d-flex flex-column">
+          <div class="mb-3">
+            <span class="fw-bold"> {{ item.scientificName }} </span>
+          </div>
+          <div class="small-fs">
+            <span class="me-3"> {{ item.author }} </span>
+            <span> {{ item.publication_year }} </span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-border" (click)="deleteTaxon( item.scientificName )"> <i class="bi bi-x-circle text-danger"></i> </button>
+        </div>
+      </li>
+    </ul>
+
+    <ng-template #elseBlock> <h3 class="mb-5"> No families registered in our database </h3> </ng-template>
+
+    <nav aria-label="Page navigation" class="d-flex justify-content-center" *ngIf="families.length > 5">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+          <button class="page-link" (click)="changePage(currentPage - 1)">&laquo;</button>
+        </li>
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [ngClass]="{'active': currentPage === i + 1}">
+          <button class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</button>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': currentPage === totalPages}">
+          <button class="page-link" (click)="changePage(currentPage + 1)">&raquo;</button>
+        </li>
+      </ul>
+    </nav>
+  </form>
+</div>

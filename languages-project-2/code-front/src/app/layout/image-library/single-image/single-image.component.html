@@ -1,0 +1,64 @@
+<div class="container d-flex flex-column">
+  <h2 class="mb-5"> Information of image {{ description }} </h2>
+
+  <div class="d-flex gap-5">
+    <img src="{{url}}" class="img-small">
+
+    <div class="container mt-3">
+      <table class="table table-hover mb-5">
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>License</th>
+          <th>Author</th>
+          <th>Owner</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td> {{ id }} </td>
+          <td> {{ description }} </td>
+          <td> {{ date }} </td>
+          <td> {{ license }} </td>
+          <td> {{ author }} </td>
+          <td> {{ owner }} </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h2> Taxon information </h2>
+      <table class="table table-hover mb-5">
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Id</th>
+          <th>Scientific Name</th>
+          <th>Author</th>
+          <th>Publication Year</th>
+          <th>Ancestor</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let taxon of taxons">
+          <td> {{ taxon.taxonType }} </td>
+          <td> {{ taxon.id }} </td>
+          <td> {{ taxon.scientificName }} </td>
+          <td> {{ taxon.author }} </td>
+          <td> {{ taxon.publication_year }} </td>
+          <td> {{ taxon.taxon_ancestor_id }} </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h2> List of keywords: </h2>
+      <h4 class="mb-5">{{ keywords }}</h4>
+
+      <p> You can create, update or remove images <a routerLink="/edit/images">here</a> </p>
+    </div>
+
+  </div>
+</div>
